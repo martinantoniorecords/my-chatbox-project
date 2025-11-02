@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbox API Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    pre {
+      text-align: left;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Chatbox API Connection Test</h2>
+  <input id="msg" type="text" placeholder="Type a message..." />
+  <button onclick="sendMessage()">Send to API</button>
+  <pre id="response">Response will appear here...</pre>
+
+  <script>
+    async function sendMessage() {
+      const msg = document.getElementById("msg").value || "Hello";
+      const responseBox = document.getElementById("response");
+      responseBox.textContent = "Sending...";
+
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg }),
+        });
+
+        const data = await res.json();
+        responseBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        responseBox.textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div id="my-chatbox"></div>
+<script src="https://your-vercel-project.vercel.app/chatbox.bundle.js"></script>
+<script>
+  Chatbox.init({
+    elementId: 'my-chatbox',
+    backendUrl: 'https://your-vercel-project.vercel.app/api/chat',
+    clientKey: null,
+    clientId: 'client1-siteA',
+    clientPrompt: 'You are the support bot for ACME Corp. Answer questions about products and shipping in a friendly tone.'
+  });
+</script>
